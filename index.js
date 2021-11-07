@@ -4,9 +4,14 @@ const redis = require('redis');
 
 require('dotenv').config()
 
-const client = redis.createClient({
-    host: process.env.REDIS_HOST,
-    port: process.env.REDIS_PORT,
+console.log(`detected slack token: ${process.env.SLACK_TOKEN}`)
+console.log(`detected slack signing secret: ${process.env.SLACK_SIGNING_SECRET}`)
+console.log(`detected redis url: ${process.env.REDIS_URL}`)
+
+const client = redis.createClient(process.env.REDIS_URL, {
+    tls: {
+        rejectUnauthorized: false
+    }
 });
 
 const web = new WebClient(process.env.SLACK_TOKEN);

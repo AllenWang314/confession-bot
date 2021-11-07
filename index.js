@@ -8,12 +8,7 @@ console.log(`detected slack token: ${process.env.SLACK_TOKEN}`)
 console.log(`detected slack signing secret: ${process.env.SLACK_SIGNING_SECRET}`)
 console.log(`detected redis url: ${process.env.REDIS_URL}`)
 
-const client = redis.createClient(process.env.REDIS_URL, {
-    tls: {
-        rejectUnauthorized: false
-    }
-});
-
+const client = redis.createClient(process.env.REDIS_URL);
 const web = new WebClient(process.env.SLACK_TOKEN);
 const slackEvents = createEventAdapter(process.env.SLACK_SIGNING_SECRET);
 
